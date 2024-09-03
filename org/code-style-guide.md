@@ -233,7 +233,7 @@ except ValueError:
 
 ## Final Notes
 
-1. Consistency is key. When in doubt, always maintain consistency with the existing codebase. If in doubt, ask a senior developer for guidance.
+1. Consistency is key. Always prioritize maintaining consistency with the existing codebase. If in doubt, ask a senior developer for guidance. Generally, refactoring solely for style consistency is not recommended.
 2. Recommended: use tools like `ruff` to check your code against these standards.
 3. Remember, these guidelines are meant to help you write better code, not to restrict your creativity. There may be situations where breaking a rule leads to more readable code.
 
