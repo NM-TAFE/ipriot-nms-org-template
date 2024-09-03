@@ -32,10 +32,10 @@ git config --global init.defaultBranch main
 Set line endings to LF on commit and auto on checkout:
 
 ```bash
-git config --global core.autocrlf tru   e
+git config --global core.autocrlf true
 ```
 
-Note: if working on a project that has multilple developers on different operating systems, it is recommended to also add a `.gitattributes` file to the repository to ensure line endings are consistent across all platforms.
+Note: if working on a project that has multiple developers on different operating systems, it is recommended to also add a `.gitattributes` file to the repository to ensure line endings are consistent across all platforms.
 
 ```bash
 # .gitattributes
@@ -73,23 +73,176 @@ Example: `feat(auth): implement password reset functionality`
 
 Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`
 
-The scope is optional and should indicate the module or component affected. See [commit message guidelines](commit-message-guidelines.md) for more details.
+The scope is optional and should indicate the module or component affected. 
 
-## 4. Workflow
+See [Udacity Commit Message Style Guide](https://udacity.github.io/git-styleguide/) for more details.
 
-1. Create a new branch from `main` for your work
-2. Commit changes to your branch, pushing regularly
-3. Open a Pull Request (PR) to merge your branch into `main`
-4. Ensure all automated checks pass and address review comments
-5. After approval, merge using "Squash and merge"
-6. Delete your branch after merging
+## 4. Standard workflow
+
+Follow these steps for each task or feature you work on:
+
+1. **Start with an Up-to-Date Main Branch**
+
+   ```bash
+   git switch main
+   git pull origin main
+   ```
+
+2. **Create a New Branch**
+   - For planned work (created by tech lead during sprint planning):
+
+     ```bash
+     git fetch origin
+     git switch <branch-name>
+     ```
+
+   - For unplanned work:
+
+     ```bash
+     git switch -c <type>/<brief-description>
+     ```
+
+   - Example: `git switch -c feature/add-login-page`
+
+3. **Work on Your Branch**
+   - Make changes to your code
+   - Stage your changes:
+
+     ```bash
+     git add <file-name>
+     ```
+
+   - Or stage all changes:
+
+     ```bash
+     git add .
+     ```
+
+   - Commit your changes:
+
+     ```bash
+     git commit -m "<type>(<scope>): <description>"
+     ```
+
+   - Example: `git commit -m "feat(auth): implement login form"`
+
+4. **Push Your Branch**
+
+   ```bash
+   git push -u origin <branch-name>
+   ```
+
+5. **Keep Your Branch Updated**
+
+   ```bash
+   git switch <branch-name>
+   git pull origin main
+   ```
+
+   - If there are conflicts, resolve them in your code editor
+
+6. **Create a Pull Request**
+   - Go to the repository on GitHub
+   - Click "Pull requests" > "New pull request"
+   - Select your branch
+   - Fill in the PR template
+   - Assign reviewers and add labels
+
+7. **Address Review Comments**
+   - Make necessary changes in your local branch
+   - Commit and push the changes
+
+   ```bash
+   git commit -m "fix(auth): address review comments"
+   git push origin <branch-name>
+   ```
+
+8. **Update Your PR if Needed**
+   - If main has been updated, rebase your branch:
+
+     ```bash
+     git switch main
+     git pull origin main
+     git switch <branch-name>
+     git rebase main
+     ```
+
+   - If there are conflicts, resolve them and then:
+
+     ```bash
+     git add .
+     git rebase --continue
+     git push --force-with-lease origin <branch-name>
+     ```
+
+9. **Merge Your PR**
+   - Once approved, click "Squash and merge" on GitHub
+   - Confirm the squash commit message
+   - Delete the branch on GitHub when prompted
+
+10. **Clean Up Locally**
+
+    ```bash
+    git switch main
+    git pull origin main
+    git branch -d <branch-name>
+    ```
+
+11. **Celebrate!** 🎉
+
+🤔 Remember:
+
+- Commit often with clear, conventional commit messages
+- Push your branch regularly to back up your work
+- Communicate with your team about significant changes or blockers
+- Use GitHub issues and PR comments for discussions
+
+## 5. Handling Merge Conflicts
+
+If you encounter merge conflicts:
+
+1. **Identify the Conflicting Files**
+
+   ```bash
+   git status
+   ```
+
+2. **Open the Conflicting Files**
+   - Look for conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)
+   - Manually edit the files to resolve conflicts
+
+3. **Stage the Resolved Files**
+
+   ```bash
+   git add <resolved-file>
+   ```
+
+4. **Complete the Merge or Rebase**
+   - For a merge:
+
+     ```bash
+     git commit
+     ```
+
+   - For a rebase:
+
+     ```bash
+     git rebase --continue
+     ```
+
+5. **Push Your Changes**
+
+   ```bash
+   git push origin <branch-name>
+   ```
+
 
 ## 5. Pull Requests
 
 - Use the PR template provided in the repository
 - Link the relevant issue(s) in the PR description
 - Ensure all CI checks pass before requesting review
-- Obtain at least two approvals before merging
+
 
 ## 6. Code Review Process
 
@@ -120,7 +273,7 @@ The scope is optional and should indicate the module or component affected. See 
 
 ## 10. Support and Resources
 
-- For Git or GitHub issues, contact the DevOps team at <devops@northmetrosoftware.com>
+- For Git or GitHub issues, contact the DevOps team at <devops@northmetrosoftware-is-not-real.com.au>
 - Refer to our internal wiki for detailed Git tutorials and troubleshooting guides
 - Monthly "Git & GitHub Best Practices" workshops are available for all developers
 
