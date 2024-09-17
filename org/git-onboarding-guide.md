@@ -232,6 +232,8 @@ If you encounter merge conflicts:
 
 5. **Push Your Changes**
 
+> **Note:** Before pushing changes, ensure your branch reflects the latest changes by first fetching main and then rebasing or merging. Generally, we prefer a rebase workflow, but if working on a shared branch, ensure good team communication. 
+
    ```bash
    git push origin <branch-name>
    ```
